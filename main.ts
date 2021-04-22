@@ -74,6 +74,7 @@ Server.post("/GetResult", async (req, res) => {
         }
 
         await DB.collection('Servers').insertOne(D);
+        console.log(max);
         const Animalinfo = outcomes[max];
         if (Animalinfo) {
             res.send({Name: max, Desc: Animalinfo});
