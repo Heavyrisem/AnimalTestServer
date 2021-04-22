@@ -73,7 +73,7 @@ Server.post("/GetResult", async (req, res) => {
             Animal: max
         }
 
-        await DB.collection('Servers').insertOne(D);
+        await DB.collection('Result').insertOne(D);
         console.log(max);
         const Animalinfo = outcomes[max];
         if (Animalinfo) {
@@ -95,7 +95,7 @@ Server.post("/GetTestInfo", (req, res) => {
 })
 
 
-Server.listen(8989, async () => {
+Server.listen(80, async () => {
     const DB_config: mongo.MongoClientOptions = {
         useUnifiedTopology: true,
         poolSize: 2
