@@ -83,7 +83,7 @@ Server.post("/GetTestInfo", (req, res) => {
 })
 
 
-Server.listen(80, async () => {
+Server.listen(8989, async () => {
     const DB_config: mongo.MongoClientOptions = {
         useUnifiedTopology: true,
         poolSize: 2
