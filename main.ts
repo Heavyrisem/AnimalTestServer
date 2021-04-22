@@ -5,9 +5,15 @@ import * as mongo from 'mongodb';
 import Config from './Config.json';
 import Data from './Data.json';
 
-let DB_Client;
+interface DB_Data {
+    date: Date,
+    Animal: string
+}
+
+let DB_Client: mongo.MongoClient;
 const Server = express();
 
+Server.use(express.static('./build'));
 Server.use(cors())
 Server.use(express.json());
 Server.use(express.urlencoded({
@@ -41,8 +47,9 @@ Server.post("/GetQuestion", (req, res) => {
     }
 });
 
-Server.post("/GetResult", (req, res) => {
+Server.post("/GetResult", async (req, res) => {
     if (req.body.Scores) {
+        let DB = await DB_Client.db();
 
         let Result: {[index: string]: number} = {};
 
@@ -61,8 +68,12 @@ Server.post("/GetResult", (req, res) => {
                 max = Elem;
             }
         }
+        const D: DB_Data = {
+            date: new Date(),
+            Animal: max
+        }
 
-
+        await DB.collection('Servers').insertOne(D);
         const Animalinfo = outcomes[max];
         if (Animalinfo) {
             res.send({Name: max, Desc: Animalinfo});
