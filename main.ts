@@ -74,7 +74,7 @@ Server.post("/GetResult", async (req, res) => {
         }
 
         await DB.collection('Result').insertOne(D);
-        const Perc = (await DB.collection('Result').find({Animal: D.Animal}).count()) / (await DB.collection('Result').find({}).count()) * 100;
+        const Perc = Math.floor((await DB.collection('Result').find({Animal: D.Animal}).count()) / (await DB.collection('Result').find({}).count()) * 100);
         console.log(max);
         const Animalinfo = outcomes[max];
         if (Animalinfo) {
