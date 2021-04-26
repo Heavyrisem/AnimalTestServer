@@ -13,7 +13,7 @@ interface DB_Data {
 let DB_Client: mongo.MongoClient;
 const Server = express();
 
-Server.use(express.static('./web/build'));
+Server.use(express.static('./build'));
 Server.use(cors())
 Server.use(express.json());
 Server.use(express.urlencoded({
